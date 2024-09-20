@@ -15,7 +15,7 @@ jobs:
       - name: Set Up php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix }}
+          php-version: ${{ matrix.php-version }}
 
       - name: Run Script
         run: |
