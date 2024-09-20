@@ -1,9 +1,36 @@
-name: DiferentesSO
+name: CoonServer
 on: [push]
 jobs:
-  Demos:
-    runs-on: windows-2022
+  local-action:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: ls
-        run: dir
+      - name: Setup
+        run: |
+          #Creo la carpeta ssh en el home
+          mkdir -p ~/.ssh
+          #Adquiero la clave secreta guardada en secrets action y la guardo en id_rsa
+          echo "${{ secrets.KEY_SERVER }}" >>  ~/.ssh/id_rsa
+          #Cambio los permisos de la carpeta recien creada
+          chmod 600 ~/.ssh/id_rsa
+          #Para que no me pida interactuar preguntando guardo la ip de la conexión como cnocida
+          ssh-keyscan -H 20.200.100.18 >> ~/.ssh/known_hosts
+
+      - name: Ls ssh
+        #Ejecuto ls de la conexion de la terminal para certificar la conexion
+        run: ssh azureuser@20.200.100.18 "ls -al"
+
+        #Podemos en marketplace de github ver como hacer el deploy mediante ssh de diferentes implementaciones
+      - name: execute remote ssh using password
+        uses: appleboy/ssh-action@v1.0.3
+        if: success()
+        with:
+          host: 20.200.100.18
+          username: azureuser
+          key: ${{ secrets.KEY_SERVER }}
+          port: 20
+          #Este escript es gracias aco actios uses
+          script: |
+            cd /home/azureuser/actions
+            git pull origin main
+            #Podemos seguir ejecutando migraciones, etc
