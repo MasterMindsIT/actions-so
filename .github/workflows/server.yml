@@ -2,7 +2,7 @@ name: DiferentesSO
 on: [push]
 jobs:
   Demos:
-    runs-on: ubuntu-20.04
+    runs-on: macos-latest
 
     steps:
       - name: ls
