@@ -21,3 +21,13 @@ jobs:
         run: |
           echo "PHP VERSION ${{ matrix.php-version }}"
           php -v
+      #Para recibir notificaciones de Slack
+      #- name: Slack Notification
+        #uses: rtCamp/action-slack-notify@v2
+        #env:
+            #Creamos en secrets la url geenrada por slack en tools y setting->ManageApp-> en el buscador "Incomming Wbehook"
+            #Luego ADD to Slack->choose canal y Add comming que genera la url que se configura en secrets de github SLACK_WEBHOOK_URL
+          #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        #with:
+          #author_name: "Action"
+          #fields: repo,message,commit,author,action,eventName
