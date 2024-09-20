@@ -1,0 +1,23 @@
+name: Matrix
+on: [push]
+jobs:
+  miMatrix:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [7.4, 8.0, 8.1]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set Up php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix }}
+
+      - name: Run Script
+        run: |
+          echo "PHP VERSION ${{ matrix.php-version }}"
+          php -v
