@@ -1,0 +1,9 @@
+name: DiferentesSO
+on: [push]
+jobs:
+  Demos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ls
+        run: ls -al
