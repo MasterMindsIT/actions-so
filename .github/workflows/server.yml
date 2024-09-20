@@ -2,8 +2,8 @@ name: DiferentesSO
 on: [push]
 jobs:
   Demos:
-    runs-on: macos-latest
+    runs-on: windows-2022
 
     steps:
       - name: ls
-        run: ls -al
+        run: dir
